@@ -33,7 +33,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item{!! classActivePath('/') !!}">
+                            <a class="nav-link" href="{{ route('index') }}">Главная</a>
+                        </li>
+                        <li class="nav-item{!! classActivePath('services') !!}">
+                            <a class="nav-link" href="{{ route('services') }}">Услуги</a>
+                        </li>
+                        <li class="nav-item{!! classActivePath('doctors') !!}">
+                            <a class="nav-link" href="{{ route('doctors') }}">Врачи</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

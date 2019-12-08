@@ -12,10 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('index');
+})->name('index');
 
-Route::get('/doctors', 'DoctorController@index');
+Route::get('/doctors', 'DoctorController@index')->name('doctors');
+Route::get('/doctors/{doctor}', 'DoctorController@show');
+
+Route::get('/services', 'ServiceController@index')->name('services');
+Route::get('/services/{service}', 'ServiceController@show');
 
 Auth::routes();
 

@@ -130,7 +130,8 @@ return [
     */
 
     'nbrPages' => [
-        'doctors' => 3,
+        'doctors' => 6,
+        'services' => 10
     ],
 
     /*

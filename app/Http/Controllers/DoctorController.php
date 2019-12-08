@@ -10,21 +10,22 @@ class DoctorController extends Controller
     /**
      * Display a listing of the doctors.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
-        $doctors = Doctor::with('specialities')->paginate(config('app.nbrPages.doctors'));
+        $doctors = Doctor::paginate(config('app.nbrPages.doctors'));
         return view('doctors.index', compact('doctors'));
     }
 
     /**
      * Display info about the doctor.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function show()
+    public function show($id)
     {
-        
+        $doctor = Doctor::find($id);
+        return view('doctors.show', compact('doctor'));
     }
 }
