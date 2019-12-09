@@ -41,9 +41,6 @@ class CreateDoctorSpecialityTable extends Migration
     {
         Schema::table('doctor_speciality', function (Blueprint $table) {
             $table->dropForeign('doctor_speciality_doctor_id_foreign');
-        });
-
-        Schema::table('doctor_speciality', function (Blueprint $table) {
             $table->dropForeign('doctor_speciality_speciality_id_foreign');
         });
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDoctorsTable extends Migration
+class CreateIntervalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateDoctorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('doctors', function (Blueprint $table) {
+        Schema::create('intervals', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('image_id');
-            $table->string('name', 255);
-            $table->timestamps();
+            $table->time('time');
         });
     }
 
@@ -28,6 +26,6 @@ class CreateDoctorsTable extends Migration
      */
     public function down()
     {
-       Schema::dropIfExists('doctors');
+        Schema::dropIfExists('intervals');
     }
 }

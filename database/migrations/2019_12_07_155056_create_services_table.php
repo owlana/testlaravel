@@ -27,10 +27,6 @@ class CreateServicesTable extends Migration
      */
     public function down()
     {
-        Schema::table('services', function (Blueprint $table) {
-            $table->dropForeign('doctor_service_service_id_foreign');
-        });
-
-        Schema::dropIfExists('services');
+       Schema::dropIfExists('services');
     }
 }

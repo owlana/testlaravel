@@ -27,10 +27,6 @@ class CreateSpecialitiesTable extends Migration
      */
     public function down()
     {
-        Schema::table('specialities', function (Blueprint $table) {
-            $table->dropForeign('doctor_speciality_speciality_id_foreign');
-        });
-
         Schema::dropIfExists('specialities');
     }
 }
