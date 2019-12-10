@@ -15,8 +15,8 @@ class CreateDoctorsTable extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('image_id');
             $table->string('name', 255);
+            $table->string('image_path', 255);
             $table->timestamps();
         });
     }

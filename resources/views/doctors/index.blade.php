@@ -21,7 +21,7 @@
                             </ul>
                         </div>
                     </div>
-                    <img src="" class="bd-placeholder-img card-img-right flex-auto d-none d-lg-block" width="200" height="250"/>
+                    <img src="{{ asset($doctor->image_path) }}" class="bd-placeholder-img card-img-right flex-auto d-none d-lg-block" height="250"/>
                 </div>
             </div>
         @endforeach
