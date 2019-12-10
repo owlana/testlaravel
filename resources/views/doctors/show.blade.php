@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
         <h3 class="mb-2">{{ $doctor->name }}</h3>
-    <img src="" width="200" height="250"/>
+    <img src="{{ asset($doctor->image_path) }}" height="250"/>
     @foreach ($doctor->specialities as $speciality)
         <div class="mb-1 text-muted">{{ $speciality->title }}</div>
     @endforeach
