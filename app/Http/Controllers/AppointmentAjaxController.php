@@ -38,9 +38,13 @@ class AppointmentAjaxController extends Controller
 
     public function delete(Request $request)
     {
-        if (!Appointment::destroy($request->input('interval'))) {
+        $appointment = Appointment::find($request->input('appointment'));
+
+        if (!Appointment::destroy($request->input('appointment'))) {
             return response($this->response);
         }
+
+        IntervalSchedule::where('id', $appointment->interval_schedule_id)->update(['is_busy' => false]);
 
         $this->response['status'] = 1;
         return response($this->response);

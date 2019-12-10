@@ -25,7 +25,7 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        $service = Service::findOrFail($id);
+        $service = Service::with('doctors')->findOrFail($id);
         return view('services.show', compact('service'));
     }
 }

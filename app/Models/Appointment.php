@@ -14,22 +14,22 @@ class Appointment extends Model
     public $timestamps = false;
 
     /**
-     * Has One relation
+     * Belongs To relation
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOneThrough
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function schedule()
+    public function intervalSchedule()
     {
-        return $this->hasOneThrough(Schedule::class, IntervalSchedule::class);
+        return $this->belongsTo(IntervalSchedule::class);
     }
 
     /**
      * Has One relation
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOneThrough
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function interval()
+    public function service()
     {
-        return $this->hasOneThrough(Interval::class, IntervalSchedule::class);
+        return $this->belongsTo(Service::class);
     }
 }

@@ -14,7 +14,11 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        $doctors = Doctor::orderBy('name', 'asc')->paginate(config('app.nbrPages.doctors'));
+        $doctors = Doctor::with('specialities')
+            ->with('services')
+            ->orderBy('name', 'asc')
+            ->paginate(config('app.nbrPages.doctors'));
+
         return view('doctors.index', compact('doctors'));
     }
 
@@ -25,7 +29,11 @@ class DoctorController extends Controller
      */
     public function show($id)
     {
-        $doctor = Doctor::findOrFail($id);
+        $doctor = Doctor::with('specialities')
+            ->with('services')
+            ->with('schedules')
+            ->findOrFail($id);
+        
         return view('doctors.show', compact('doctor'));
     }
 }

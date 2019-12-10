@@ -15,4 +15,14 @@ class Schedule extends Model
     {
         return $this->belongsToMany(Interval::class)->withPivot('id')->wherePivot('is_busy', false);
     }
+
+    /**
+     * Belongs To relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function doctor()
+    {
+        return $this->belongsTo(Doctor::class);
+    }
 }

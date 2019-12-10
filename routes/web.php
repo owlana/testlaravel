@@ -23,6 +23,7 @@ Route::get('/services/{service}', 'ServiceController@show');
 
 Route::post('/signup', 'AppointmentAjaxController@create')->name('signup')->middleware('auth');
 Route::post('/getintervals', 'AppointmentAjaxController@getIntervals')->name('getintervals')->middleware('auth');
+Route::post('/delappointment', 'AppointmentAjaxController@delete')->name('delappointment')->middleware('auth');
 
 Auth::routes();
 

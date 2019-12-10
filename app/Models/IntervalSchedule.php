@@ -19,4 +19,24 @@ class IntervalSchedule extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     * Belongs To relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function interval()
+    {
+        return $this->belongsTo(Interval::class);
+    }
+
+    /**
+     * Belongs To relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class);
+    }
 }
