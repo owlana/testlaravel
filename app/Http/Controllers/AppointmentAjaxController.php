@@ -7,6 +7,7 @@ use App\Models\IntervalSchedule;
 use App\Models\Appointment;
 use App\Models\Schedule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AppointmentAjaxController extends Controller
 {
@@ -26,12 +27,17 @@ class AppointmentAjaxController extends Controller
         $appointment->user_id = Auth::user()->id;
         $appointment->service_id = $request->input('service');
         $appointment->interval_schedule_id = $request->input('interval');
-        $res = $appointment->save();
-        if (!$res) {
+
+        DB::beginTransaction();
+        try {
+            $appointment->save();
+            IntervalSchedule::where('id', $request->input('interval'))->update(['is_busy' => true]);
+        } catch(\Exception $e) {
+            DB::rollBack();
             return response($this->response);
         }
+        DB::commit();
 
-        IntervalSchedule::where('id', $request->input('interval'))->update(['is_busy' => true]);
         $this->response['status'] = 1;
         return response($this->response);
     }
@@ -39,12 +45,19 @@ class AppointmentAjaxController extends Controller
     public function delete(Request $request)
     {
         $appointment = Appointment::find($request->input('appointment'));
-
-        if (!Appointment::destroy($request->input('appointment'))) {
+        if (!$appointment) {
             return response($this->response);
         }
 
-        IntervalSchedule::where('id', $appointment->interval_schedule_id)->update(['is_busy' => false]);
+        DB::beginTransaction();
+        try {
+            Appointment::destroy($request->input('appointment'));
+            IntervalSchedule::where('id', $appointment->interval_schedule_id)->update(['is_busy' => false]);
+        } catch(\Exception $e) {
+            DB::rollBack();
+            return response($this->response);
+        }
+        DB::commit();
 
         $this->response['status'] = 1;
         return response($this->response);

@@ -31,6 +31,8 @@ class CreateAppointmentsTable extends Migration
             $table->foreign('service_id')->references('id')->on('services')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
+
+            $table->unique('interval_schedule_id');
         });
     }
 
@@ -45,6 +47,7 @@ class CreateAppointmentsTable extends Migration
             $table->dropForeign('appointments_interval_schedule_id_foreign');
             $table->dropForeign('appointments_user_id_foreign');
             $table->dropForeign('appointments_service_id_foreign');
+            $table->dropUnique('appointments_interval_schedule_id_unique');
         });
 
         Schema::dropIfExists('appointments');

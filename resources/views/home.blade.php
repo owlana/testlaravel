@@ -60,6 +60,7 @@
                 success:function(data){
                     if (!data.status) {
                         alert('Ошибка удаления');
+                        return;
                     }
                     $('#appointment' + $(el).data('appointment')).remove();
                 }
