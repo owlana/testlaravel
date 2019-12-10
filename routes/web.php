@@ -21,6 +21,9 @@ Route::get('/doctors/{doctor}', 'DoctorController@show');
 Route::get('/services', 'ServiceController@index')->name('services');
 Route::get('/services/{service}', 'ServiceController@show');
 
+Route::post('/signup', 'AppointmentAjaxController@create')->name('signup')->middleware('auth');
+Route::post('/getintervals', 'AppointmentAjaxController@getIntervals')->name('getintervals')->middleware('auth');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -25,4 +25,16 @@ class Doctor extends Model
     {
         return $this->belongsToMany(Service::class)->withPivot('price');
     }
+
+    /**
+     * Has Many relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class)
+            ->where('date', '>=', date('Y-m-d'))
+            ->has('intervals');
+    }
 }

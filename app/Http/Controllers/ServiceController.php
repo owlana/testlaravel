@@ -14,7 +14,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::paginate(config('app.nbrPages.services'));
+        $services = Service::has('doctors')->paginate(config('app.nbrPages.services'));
         return view('services.index', compact('services'));
     }
 
@@ -25,7 +25,7 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        $service = Service::find($id);
+        $service = Service::findOrFail($id);
         return view('services.show', compact('service'));
     }
 }

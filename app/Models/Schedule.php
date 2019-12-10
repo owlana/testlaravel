@@ -13,6 +13,6 @@ class Schedule extends Model
      */
     public function intervals()
     {
-        return $this->belongsToMany(Interval::class)->wherePivot('is_busy', false);
+        return $this->belongsToMany(Interval::class)->withPivot('id')->wherePivot('is_busy', false);
     }
 }
