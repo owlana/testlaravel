@@ -22,9 +22,9 @@
                                 <tbody>
                                 @foreach ($appointments as $appointment)
                                     <tr id="appointment{{ $appointment->id }}">
-                                        <td>{{ $appointment->intervalSchedule->schedule->date }} {{ $appointment->intervalSchedule->interval->time }}</td>
-                                        <td>{{ $appointment->intervalSchedule->schedule->doctor->name }}</td>
-                                        <td>{{ $appointment->service->title }}</td>
+                                        <td>{{ $appointment->date }} {{ $appointment->time }}</td>
+                                        <td>{{ $appointment->name }}</td>
+                                        <td>{{ $appointment->title }}</td>
                                         <td>
                                             <button class="btn btn-primary j-appointment-delete" onclick="deleteAppointment(this)"
                                                     data-appointment="{{ $appointment->id }}">Удалить</button>
@@ -34,6 +34,8 @@
                                 </tbody>
                             </table>
                         </div>
+                    @else
+                        <p>Ваш план записи к врачам пуст.</p>
                     @endif
                 </div>
             </div>
