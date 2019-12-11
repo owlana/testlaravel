@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Service;
+use Illuminate\Support\Facades\Cache;
 
 class ServiceController extends Controller
 {
@@ -12,9 +13,14 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::has('doctors')->paginate(config('app.nbrPages.services'));
+        $page = $request->has('page') ? $request->query('page') : 1;
+
+        $services = Cache::remember('services_page_' . $page, 900, function () {
+            return Service::has('doctors')->paginate(config('app.nbrPages.services'));
+        });
+
         return view('services.index', compact('services'));
     }
 
@@ -25,7 +31,10 @@ class ServiceController extends Controller
      */
     public function show($id)
     {
-        $service = Service::with('doctors')->findOrFail($id);
+        $service = Cache::remember('service_' . $id, 900, function () use ($id) {
+            return Service::with('doctors')->findOrFail($id);
+        });
+
         return view('services.show', compact('service'));
     }
 }
